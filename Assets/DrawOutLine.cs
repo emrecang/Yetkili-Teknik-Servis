@@ -1,50 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
+﻿using UnityEngine;
 
 public class DrawOutLine : MonoBehaviour
 {
     public Shader myShader;
-    GameObject selected;
-    void Update()
+    public Shader standart;
+    private void Start()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            selected = SendRay();
-        }
-        if (Input.GetMouseButton(0))
-        {
-            if (selected.CompareTag("Part"))
-            {
-                selected.GetComponent<MeshRenderer>().material.shader = myShader;
-                    UIManager.instance.ChangePartText(selected.GetComponent<PartData>().partName);
-            }
-        }
-        if(Input.GetMouseButtonUp(0))
-        {
-            if(selected != null)
-            {
-                if (selected.CompareTag("Part"))
-                {
-                    selected.GetComponent<MeshRenderer>().material.shader = Shader.Find("Standard");
-                    UIManager.instance.ChangePartText("");
-                }
-                selected = null;
-            }
-        }
+        standart = Shader.Find("Standart");
     }
-    private GameObject SendRay()
+    public void SetStandart(GameObject selected)
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if (selected.CompareTag("Part"))
         {
-            return hit.transform.gameObject;
-        }
-        else
-        {
-            return null;
+            selected.GetComponent<MeshRenderer>().material.shader = standart;
+            UIManager.instance.ChangePartText("");
         }
     }
 
+    public void SetHighLighted(GameObject selected)
+    {
+        if (selected.CompareTag("Part"))
+        {
+            selected.GetComponent<MeshRenderer>().material.shader = myShader;
+            UIManager.instance.ChangePartText(selected.GetComponent<PartData>().partName);
+        }
+    }
 }

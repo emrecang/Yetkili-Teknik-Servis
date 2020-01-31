@@ -2,22 +2,23 @@
 
 public class DrawOutLine : MonoBehaviour
 {
-    public Shader myShader;
-    public Shader standart;
+    public static Shader myShader;
+    public static Shader standard;
     private void Start()
     {
-        standart = Shader.Find("Standart");
+        standard = Shader.Find("Standard");
+        myShader = Shader.Find("Self-Illumin/Outlined Diffuse");
     }
-    public void SetStandart(GameObject selected)
+    public static void SetStandard(GameObject selected)
     {
         if (selected.CompareTag("Part"))
         {
-            selected.GetComponent<MeshRenderer>().material.shader = standart;
+            selected.GetComponent<MeshRenderer>().material.shader = standard;
             UIManager.instance.ChangePartText("");
         }
     }
 
-    public void SetHighLighted(GameObject selected)
+    public static void SetHighLighted(GameObject selected)
     {
         if (selected.CompareTag("Part"))
         {

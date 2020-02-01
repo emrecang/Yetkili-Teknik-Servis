@@ -6,4 +6,6 @@ public class PartData : MonoBehaviour
 {
     public string partName = "Ram";
     public SlotType type;
+
+    public SlotManager attachedSlot;
 }

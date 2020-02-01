@@ -6,9 +6,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameObject holdingObject;
 
-    void Start()
+    void Awake()
     {
-        
+        holdingObject = null;
     }
 
     // Update is called once per frame

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
@@ -11,6 +12,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI hourText;
     public TextMeshProUGUI dayImageText;
 
+    public GameObject analogClock;
     public GameObject dayImage;
     public GameObject toolbox;
     private void Awake()
@@ -41,5 +43,9 @@ public class UIManager : MonoBehaviour
     public void ChangeDayImageText(string text)
     {
         dayImageText.text = text;
+    }
+    public void ChangeClockFillAmount(float value)
+    {
+        analogClock.GetComponent<Image>().fillAmount = value;
     }
 }

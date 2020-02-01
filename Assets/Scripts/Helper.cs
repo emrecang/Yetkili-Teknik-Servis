@@ -6,7 +6,7 @@ public enum SlotType
     RAM,
     CPU,
     GPU,
-    FAN,
+    HDD,
     PSU
 }
 public class Helper : MonoBehaviour

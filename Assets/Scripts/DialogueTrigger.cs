@@ -6,7 +6,6 @@ public class DialogueTrigger : MonoBehaviour
 {
 
 	public Dialogue dialogue;
-	public List<PersonData> person;
 	public int selected;
 	public static DialogueTrigger instance;
 	private void Awake()

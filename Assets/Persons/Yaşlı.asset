@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d28d6e7c1db92d4286c631b373f8ed6, type: 3}
-  m_Name: Ahmet
+  m_Name: "Ya\u015Fl\u0131"
   m_EditorClassIdentifier: 
   personName: Ahmet
   sentences:
@@ -18,3 +18,4 @@ MonoBehaviour:
   - "Aleyk\xFCm Selam Bilader Benim Ad\u0131mda Haydar."
   - "Tan\u0131\u015Ft\u0131\u011F\u0131m\u0131za Memnun Oldum Haydar Bey"
   - Bende Memnun Oldum Ahmet.
+  type: 3

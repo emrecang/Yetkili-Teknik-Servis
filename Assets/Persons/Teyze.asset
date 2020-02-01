@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d28d6e7c1db92d4286c631b373f8ed6, type: 3}
-  m_Name: Player
+  m_Name: Teyze
   m_EditorClassIdentifier: 
-  personName: Player
+  personName: "Ay\u015Fe"
   sentences:
-  - "Ho\u015F Geldiniz Ahmet Bey benim ad\u0131m haydar\t"
-  - Bende Memnun oldum
-  type: 0
+  - "o\u011Flum\n"
+  type: 4

@@ -15,10 +15,7 @@ public class Dialogue : MonoBehaviour
 	}
 	[TextArea(3, 10)]
 	public string[] sentences;
-	public void Start()
-	{
-		SetData(person);
-	}
+
 
 	public void SetData(PersonData pers)
 	{
@@ -28,6 +25,6 @@ public class Dialogue : MonoBehaviour
 		{
 			sentences[i] = pers.sentences[i];
 		}
-		brokenType = person.type;
+		brokenType = pers.type;
 	}
 }

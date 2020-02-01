@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameObject holdingObject;
     public static GameObject customer;
+    public List<PersonData> person;
     public GameObject cust;
     public static GameManager instance;
     private void Awake()
@@ -32,6 +33,8 @@ public class GameManager : MonoBehaviour
     }
     public void WaitCustomerGameState()
     {
+        var rand = Random.Range(0, person.Count);
+        Dialogue.instance.SetData(person[rand]);
         ChangeGameState(GameStates.WaitCustomer);
         StartCoroutine(MoveCustomer());
     }

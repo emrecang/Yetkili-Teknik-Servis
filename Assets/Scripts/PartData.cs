@@ -5,4 +5,5 @@ using UnityEngine;
 public class PartData : MonoBehaviour
 {
     public string partName = "Ram";
+    public SlotType type;
 }

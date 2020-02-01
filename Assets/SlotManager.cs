@@ -15,8 +15,6 @@ public class SlotManager : MonoBehaviour
         }
     }
     
-    
-    
     IEnumerator Snap(GameObject snapObj)
     {
         while(Vector3.Distance(snapObj.transform.position, transform.position) < 0f)

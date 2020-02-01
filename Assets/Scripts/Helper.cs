@@ -11,7 +11,6 @@ public enum SlotType
 }
 public class Helper : MonoBehaviour
 {
-    
     public static GameObject SendRay()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

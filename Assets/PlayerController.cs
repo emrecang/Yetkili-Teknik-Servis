@@ -36,7 +36,6 @@ public class PlayerController : MonoBehaviour
         if(Input.GetMouseButtonUp(0))
         {
             DrawOutLine.SetStandard(GameManager.holdingObject);
-
             GameManager.holdingObject.GetComponent<Rigidbody>().velocity =Vector3.zero;
             GameManager.holdingObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             GameManager.holdingObject = null;

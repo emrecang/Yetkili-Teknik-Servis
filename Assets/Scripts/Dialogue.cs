@@ -5,9 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class Dialogue : MonoBehaviour
 {
+	public static Dialogue instance;
 	public PersonData person;
 	public string pname;
-	public static Dialogue instance;
+	public SlotType brokenType;
 	private void Awake()
 	{
 		instance = this;
@@ -27,5 +28,6 @@ public class Dialogue : MonoBehaviour
 		{
 			sentences[i] = pers.sentences[i];
 		}
+		brokenType = person.type;
 	}
 }

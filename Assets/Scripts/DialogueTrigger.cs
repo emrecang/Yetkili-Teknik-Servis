@@ -8,17 +8,13 @@ public class DialogueTrigger : MonoBehaviour
 	public Dialogue dialogue;
 	public List<PersonData> person;
 	public int selected;
+	public static DialogueTrigger instance;
+	private void Awake()
+	{
+		instance = this;
+	}
 	public void TriggerDialogue()
 	{
 		FindObjectOfType<DialogueManager>().StartDialogue(dialogue);	
-	}
-	public void Start()
-	{
-		StartCoroutine(StartTrigger());
-	}
-	public IEnumerator StartTrigger()
-	{
-		yield return new WaitForSeconds(2f);
-		TriggerDialogue();
 	}
 }

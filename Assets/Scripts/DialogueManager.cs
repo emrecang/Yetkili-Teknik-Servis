@@ -9,11 +9,16 @@ public class DialogueManager : MonoBehaviour
 	public Dialogue dialogue;
 	public TextMeshProUGUI nameText;
 	public TextMeshProUGUI dialogueText;
-
+	public Button textPanel;
+	Coroutine cor;
 	//public Animator animator;
 
-	private Queue<string> sentences;
-
+	public Queue<string> sentences;
+	public static DialogueManager instance;
+	private void Awake()
+	{
+		instance = this;
+	}
 	// Use this for initialization
 	void Start()
 	{
@@ -22,8 +27,7 @@ public class DialogueManager : MonoBehaviour
 	
 	public void StartDialogue(Dialogue dialogue)
 	{
-		//animator.SetBool("IsOpen", true);
-
+		textPanel.gameObject.SetActive(true);
 		nameText.text = dialogue.pname;
 
 		sentences.Clear();
@@ -38,6 +42,7 @@ public class DialogueManager : MonoBehaviour
 
 	public void DisplayNextSentence()
 	{
+		Debug.Log(sentences.Count);
 		if (sentences.Count == 0)
 		{
 			EndDialogue();
@@ -45,8 +50,9 @@ public class DialogueManager : MonoBehaviour
 		}
 
 		string sentence = sentences.Dequeue();
-		StopAllCoroutines();
-		StartCoroutine(TypeSentence(sentence));
+		if(cor!=null)
+		StopCoroutine(cor);
+		cor = StartCoroutine(TypeSentence(sentence));
 	}
 
 	IEnumerator TypeSentence(string sentence)
@@ -61,7 +67,8 @@ public class DialogueManager : MonoBehaviour
 
 	void EndDialogue()
 	{
-		//animator.SetBool("IsOpen", false);
+		textPanel.gameObject.SetActive(false);
+		GameManager.instance.BackCustomerCor();
 	}
 
 }

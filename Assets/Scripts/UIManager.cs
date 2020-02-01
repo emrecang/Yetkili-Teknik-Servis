@@ -5,10 +5,14 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager instance;
     public TextMeshProUGUI partInfoText;
     public TextMeshProUGUI dayText;
     public TextMeshProUGUI hourText;
-    public static UIManager instance;
+    public TextMeshProUGUI dayImageText;
+
+    public GameObject dayImage;
+    public GameObject toolbox;
     private void Awake()
     {
         instance = this;
@@ -25,5 +29,17 @@ public class UIManager : MonoBehaviour
     public void ChangeHourText(string text)
     {
         hourText.text = text;
+    }
+    public void ChangeToolBox(bool state)
+    {
+        toolbox.SetActive(state);
+    }
+    public void ChangeDayImage(bool state)
+    {
+        dayImage.SetActive(state);
+    }
+    public void ChangeDayImageText(string text)
+    {
+        dayImageText.text = text;
     }
 }

@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   personName: Ahmet
   sentences:
-  - "Merhaba benim ad\u0131m ahmet"
-  - Bende Memnun oldum haydar bey
+  - "Merhaba Benim Ad\u0131m Ahmet"
+  - "Aleyk\xFCm Selam Bilader Benim Ad\u0131mda Haydar."
+  - "Tan\u0131\u015Ft\u0131\u011F\u0131m\u0131za Memnun Oldum Haydar Bey"
+  - Bende Memnun Oldum Ahmet.

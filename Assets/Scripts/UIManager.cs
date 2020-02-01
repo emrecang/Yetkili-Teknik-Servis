@@ -6,8 +6,6 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     public TextMeshProUGUI partInfoText;
-    public TextMeshProUGUI dayText;
-    public TextMeshProUGUI hourText;
     public static UIManager instance;
     private void Awake()
     {
@@ -17,13 +15,5 @@ public class UIManager : MonoBehaviour
     public void ChangePartText(string text)
     {
         partInfoText.text = text;
-    }
-    public void ChangeDayText(string text)
-    {
-        dayText.text = text;
-    }
-    public void ChangeHourText(string text)
-    {
-        hourText.text = text;
     }
 }

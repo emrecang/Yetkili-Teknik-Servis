@@ -13,42 +13,81 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+
             GameManager.holdingObject = Helper.SendRay();
-            
+
+            if (GameManager.holdingObject == null)
+            {
+                Debug.Log("ey");
+                return;
+            }
+            Debug.Log("ler");
+            if (GameManager.holdingObject.CompareTag("Part") && GameManager.holdingObject.GetComponent<PartData>().attachedSlot != null)
+            {
+                GameManager.holdingObject.GetComponent<PartData>().attachedSlot.Detach();
+            }
+
             DrawOutLine.SetHighLighted(GameManager.holdingObject);
         }
         
         if (Input.GetMouseButton(0))
         {
+            if (GameManager.holdingObject == null)
+            {
+                return;
+            }
+
             if (GameManager.holdingObject.CompareTag("Part"))
             {
                 float distance = Mathf.Min(
                                     Mathf.Max(Mathf.Abs(Camera.main.transform.position.z + minDistance), 
                                     Mathf.Abs(GameManager.holdingObject.transform.position.z - Camera.main.transform.position.z 
                                     - (Input.mouseScrollDelta.y * scrollMultiplier)))
-                                , Camera.main.transform.position.z + maxDistance);
+                                    , Camera.main.transform.position.z + maxDistance);
                 Vector3 pos = Camera.main.ScreenToWorldPoint((new Vector3(Input.mousePosition.x, Input.mousePosition.y, distance)));
-
                 GameManager.holdingObject.GetComponent<Rigidbody>().MovePosition(pos);
                 GameManager.holdingObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
             }
         }
         if(Input.GetMouseButtonUp(0))
         {
-            DrawOutLine.SetStandard(GameManager.holdingObject);
-            GameManager.holdingObject.GetComponent<Rigidbody>().velocity =Vector3.zero;
-            GameManager.holdingObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-            GameManager.holdingObject = null;
+            if (GameManager.holdingObject == null)
+            {
+                return;
+            }
+            if (GameManager.holdingObject.CompareTag("Part"))
+            {
+                if(Helper.SendRay(GameManager.holdingObject.transform.position, GameManager.holdingObject.transform.forward).TryGetComponent<SlotManager>(out SlotManager candidateSlot) == true)
+                {
+                    if(candidateSlot.snapCor == null)
+                        StartCoroutine(candidateSlot.Snap());
+                }
+                DrawOutLine.SetStandard(GameManager.holdingObject);
+
+                GameManager.holdingObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                GameManager.holdingObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+                GameManager.holdingObject = null; 
+            }
         }
 
         if (Input.GetMouseButtonDown(1))
         {
             GameManager.holdingObject = Helper.SendRay();
 
+            if (GameManager.holdingObject == null)
+            {
+                return;
+            }
+
             DrawOutLine.SetHighLighted(GameManager.holdingObject);
         }
         if (Input.GetMouseButton(1))
         {
+            if (GameManager.holdingObject == null)
+            {
+                return;
+            }
+
             if (GameManager.holdingObject.CompareTag("Part"))
             {
                 GameManager.holdingObject.transform.Rotate(

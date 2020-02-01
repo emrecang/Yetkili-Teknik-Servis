@@ -6,22 +6,28 @@ public class SlotManager : MonoBehaviour
     public SlotType slot;
 
     public Coroutine snapCor;
+    public bool snapped;
 
-    private void OnTriggerEnter(Collider other)
+
+    public void Detach()
     {
-        if (other.GetComponent<PartData>().type == slot)
-        {
-            snapCor = StartCoroutine("Snap", other.transform.gameObject);
-        }
+        snapped = false;
+        GetComponent<BoxCollider>().enabled = true;
+        GameManager.holdingObject.GetComponent<PartData>().attachedSlot = null;
     }
-    
-    IEnumerator Snap(GameObject snapObj)
+
+    public IEnumerator Snap()
     {
-        while(Vector3.Distance(snapObj.transform.position, transform.position) < 0f)
+        GameObject snapObj = GameManager.holdingObject;
+        while (Vector3.Distance(snapObj.transform.position, transform.position) > 0.001f)
         {
-            snapObj.transform.position = Vector3.Lerp(snapObj.transform.position, transform.position, 0.1f);
-            snapObj.transform.rotation = Quaternion.Lerp(snapObj.transform.rotation, transform.rotation, 0.1f);
-            yield return new WaitForSeconds(0.2f);
+            snapObj.transform.position = Vector3.Lerp(snapObj.transform.position, transform.position, 3f * Time.deltaTime);
+            snapObj.transform.rotation = Quaternion.Lerp(snapObj.transform.rotation, transform.rotation, 3f * Time.deltaTime);
+            yield return new WaitForSeconds(0.001f);
         }
+        snapped = true;
+        GetComponent<BoxCollider>().enabled = false;
+        snapObj.GetComponent<PartData>().attachedSlot = this;
+        Debug.Log("Hi");
     }
 }

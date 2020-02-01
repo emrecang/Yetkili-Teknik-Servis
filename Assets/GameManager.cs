@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        holdingObject = null;
     }
     public enum GameStates
     {
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
         ChangeGameState(GameStates.WaitCustomer);
         StartCoroutine(MoveCustomer());
     }
+
 
     public void RepairGameState()
     {

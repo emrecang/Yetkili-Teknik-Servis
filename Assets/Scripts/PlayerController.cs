@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
             {
                 return;
             }
+
             if (GameManager.holdingObject.CompareTag("Part"))
             {
                 if (Helper.SendRay(GameManager.holdingObject.transform.position,
@@ -78,9 +79,9 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("PlayerController girdi");
 
                 if (Helper.SendRay(GameManager.holdingObject.transform.position,
-                    GameManager.holdingObject.transform.forward).gameObject.TryGetComponent<SlotManager>(out SlotManager candidateSlot))
+                    GameManager.holdingObject.transform.forward*1f).gameObject.TryGetComponent<SlotManager>(out SlotManager candidateSlot))
                 {
-                    Debug.Log("PlayerController girdi");
+                    Debug.Log(candidateSlot.name);
                     if(candidateSlot.snapCor == null)
                     {
                         candidateSlot.snapCor = StartCoroutine(candidateSlot.Snap());

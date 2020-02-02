@@ -33,9 +33,16 @@ public class MiniGameManager : MonoBehaviour
             if(go != null && go.CompareTag("Part"))
             {
                 SlotType miniGame = go.GetComponent<PartData>().type;
-                if(miniGame == SlotType.GPU)
+                if(go.GetComponent<PartData>().isBroken)
                 {
-                    SnakeGame();
+                    if (miniGame == SlotType.GPU)
+                    {
+                        SnakeGame();
+                    }
+                    if (miniGame == SlotType.HDD)
+                    {
+                        StartFormat();
+                    }
                 }
                 //if()
             }

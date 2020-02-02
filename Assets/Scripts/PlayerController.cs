@@ -74,7 +74,11 @@ public class PlayerController : MonoBehaviour
                 GameObject candidateObject = Helper.SendRay(GameManager.holdingObject.transform.position, GameManager.holdingObject.transform.forward);
                 if (candidateObject != null && candidateObject.CompareTag("box"))
                 {
-                    UIManager.instance.ChangeToolBox(true);
+                    UIManager.instance.ChangeToolBox(false);
+                    GameManager.instance.brokenDevice.slots.Remove(candidateObject.GetComponent<PartData>().attachedSlot);
+                    Destroy(GameManager.holdingObject.gameObject);
+                    GameManager.instance.dailyProfit += 200;
+                    GameManager.instance.ChangeMoneyValue(200);
                 }
                 Debug.Log("PlayerController girdi");
 

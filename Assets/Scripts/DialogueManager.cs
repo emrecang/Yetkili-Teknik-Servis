@@ -7,7 +7,6 @@ using TMPro;
 public class DialogueManager : MonoBehaviour
 {
 	public Dialogue dialogue;
-	public TextMeshProUGUI nameText;
 	public TextMeshProUGUI dialogueText;
 	public Button textPanel;
 	Coroutine cor;
@@ -28,7 +27,7 @@ public class DialogueManager : MonoBehaviour
 	public void StartDialogue(Dialogue dialogue)
 	{
 		textPanel.gameObject.SetActive(true);
-		nameText.text = dialogue.pname;
+		//nameText.text = dialogue.pname;
 
 		sentences.Clear();
 

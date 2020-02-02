@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     public void ChangeMoneyValue(int value)
     {
         money += value;
+        UIManager.instance.ChangeMoneyText(money.ToString());   
     }
     
     public void RepairGameState()

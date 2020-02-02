@@ -14,5 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   personName: Ali
   sentences:
-  - abi abi abi
+  - "\xC7ocuk: Haydar Abi. Abi Abiii \u015Fimdi eeee"
+  - "\xC7ocuk: Benim bilgisayarda zinecraft kas\u0131yor"
+  - "\xC7ocuk: GDA 5 de hi\xE7 a\xE7\u0131lm\u0131yor."
+  - "\xC7ocuk: Ieee yapabilir misin abi?"
+  - "Haydar: Sana da merhaba yi\u011Fenim."
+  - "Haydar: Yapar\u0131z ye\u011Fen merak etme."
+  - "\xC7ocuk: Ka\xE7 g\xFCne olur abi. Babamlar \xE7al\u0131\u015F\u0131yor biliyorsun."
+  - "\xC7ocuk:  Ben al\u0131cam bilgisayar\u0131."
+  - "Haydar: Ak\u015Fama hallederiz yi\u011Fenim."
+  - "\xC7ocuk: Tamam abi sa\u011Fol"
   type: 2
+  brokenDevice: {fileID: 0}

@@ -22,7 +22,7 @@ public class DeviceManager : MonoBehaviour
         int brokenRamCount = 0;
         foreach(var slot in slots)
         {
-            if (slot.attachedPart.isBroken)
+            if (slot.attachedPart != null && slot.attachedPart.isBroken)
             {
                 if(slot.attachedPart.type == SlotType.RAM)
                 {
@@ -59,6 +59,17 @@ public class DeviceManager : MonoBehaviour
             GameManager.instance.ChangeMoneyValue(100);
             GameManager.instance.dailyProfit += 100;
 
+        }
+    }
+    public void Fix(SlotType type)
+    {
+        foreach (var item in slots)
+        {
+            if (item.slot == type)
+            {
+                item.attachedPart.isBroken = false;
+                break;
+            }
         }
     }
     public IEnumerator WaitLittle()

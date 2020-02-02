@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
     public List<bool> buttonState;
     public GameObject logicOutput;
     public GameObject checkButton;
+    public TextMeshProUGUI money;
     bool firstGate;
     bool secondGate;
     bool thirdGate ;
@@ -35,6 +36,10 @@ public class UIManager : MonoBehaviour
         instance = this;
     }
     int i = 0;
+    public void ChangeMoneyText(string text)
+    {
+        money.text = text + "$";
+    }
     public void FormatGame(bool state)
     {
         formatPanel.SetActive(state);
@@ -123,6 +128,7 @@ public class UIManager : MonoBehaviour
         else if(i == 2)
         {
             formatText.text = "Next... Next... Next...";
+            i++;
         }
         else if (i == 3)
         {

@@ -37,6 +37,7 @@ public class SnakeEatController : MonoBehaviour
             Destroy(MiniGameManager.instance.activeGame);
             Camera.main.transform.position = MiniGameManager.instance.oldCameraPos;
             Camera.main.transform.rotation = Quaternion.Euler(0, 0, 0);
+            GameManager.instance.brokenDevice.Fix(SlotType.GPU);
         }
     }
     public void SnakeEat()

@@ -14,7 +14,17 @@ public class DrawOutLine : MonoBehaviour
         if (selected.CompareTag("Part"))
         {
             selected.GetComponent<MeshRenderer>().material.shader = standard;
-            UIManager.instance.ChangePartText("");
+            UIManager.instance.ChangePartText(""); 
+            if (selected.GetComponent<PartData>().type == SlotType.PSU)
+            {
+                selected.transform.GetChild(0).GetComponent<MeshRenderer>().material.shader = standard;
+                UIManager.instance.ChangePartText("");
+            }
+            else
+            {
+                selected.GetComponent<MeshRenderer>().material.shader = standard;
+                UIManager.instance.ChangePartText("");
+            }
         }
     }
 
@@ -22,8 +32,17 @@ public class DrawOutLine : MonoBehaviour
     {
         if (selected.CompareTag("Part"))
         {
-            selected.GetComponent<MeshRenderer>().material.shader = myShader;
-            UIManager.instance.ChangePartText(selected.GetComponent<PartData>().type.ToString());
+            if(selected.GetComponent<PartData>().type == SlotType.PSU)
+            {
+                selected.transform.GetChild(0).GetComponent<MeshRenderer>().material.shader = myShader;
+                UIManager.instance.ChangePartText(selected.GetComponent<PartData>().type.ToString());
+            }
+            else
+            {
+                selected.GetComponent<MeshRenderer>().material.shader = myShader;
+                UIManager.instance.ChangePartText(selected.GetComponent<PartData>().type.ToString());
+            }
+            
         }
     }
 }

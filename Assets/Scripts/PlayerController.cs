@@ -71,15 +71,14 @@ public class PlayerController : MonoBehaviour
 
             if (GameManager.holdingObject.CompareTag("Part"))
             {
-                if (Helper.SendRay(GameManager.holdingObject.transform.position,
-                    GameManager.holdingObject.transform.forward).gameObject.CompareTag("box"))
+                GameObject candidateObject = Helper.SendRay(GameManager.holdingObject.transform.position, GameManager.holdingObject.transform.forward);
+                if (candidateObject != null && candidateObject.CompareTag("box"))
                 {
                     UIManager.instance.ChangeToolBox(true);
                 }
                 Debug.Log("PlayerController girdi");
 
-                if (Helper.SendRay(GameManager.holdingObject.transform.position,
-                    GameManager.holdingObject.transform.forward*1f).gameObject.TryGetComponent<SlotManager>(out SlotManager candidateSlot))
+                if (candidateObject!= null && candidateObject.TryGetComponent<SlotManager>(out SlotManager candidateSlot))
                 {
                     Debug.Log(candidateSlot.name);
                     if(candidateSlot.snapCor == null)
@@ -137,8 +136,9 @@ public class PlayerController : MonoBehaviour
             }
             if (GameManager.holdingObject.CompareTag("Part"))
             {
-                if (Helper.SendRay(GameManager.holdingObject.transform.position, 
-                    GameManager.holdingObject.transform.forward).TryGetComponent<SlotManager>(out SlotManager candidateSlot) == true)
+                GameObject candidateObject = Helper.SendRay(GameManager.holdingObject.transform.position,
+                    GameManager.holdingObject.transform.forward);
+                if (candidateObject != null && candidateObject.TryGetComponent<SlotManager>(out SlotManager candidateSlot) == true)
                 {
                     if (candidateSlot.snapCor == null)
                         StartCoroutine(candidateSlot.Snap());

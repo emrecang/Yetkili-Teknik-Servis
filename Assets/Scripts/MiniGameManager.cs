@@ -19,6 +19,10 @@ public class MiniGameManager : MonoBehaviour
     {
         UIManager.instance.FormatGame(true);
     }
+    public void StartLogicGates()
+    {
+        UIManager.instance.LogicGatesStartFinish(true);
+    }
     void Start()
     {
         gameStarted = false;
@@ -42,6 +46,10 @@ public class MiniGameManager : MonoBehaviour
                     if (miniGame == SlotType.HDD)
                     {
                         StartFormat();
+                    }
+                    if(miniGame == SlotType.CPU)
+                    {
+                        StartLogicGates();
                     }
                 }
                 //if()

@@ -20,6 +20,17 @@ public class UIManager : MonoBehaviour
     public GameObject formatPanel;
     public TextMeshProUGUI formatText;
     public TextMeshProUGUI formatNextText;
+
+    public GameObject logicGatePanel;
+    public List<TextMeshProUGUI> buttonStateText;
+    public List<bool> buttonState;
+    public GameObject logicOutput;
+    bool firstGate;
+    bool secondGate;
+    bool thirdGate ;
+    bool fourthGate;
+    bool secondLayerFirstGate;
+    bool secondLayerSecondGate;
     private void Awake()
     {
         instance = this;
@@ -31,23 +42,88 @@ public class UIManager : MonoBehaviour
         formatText.text = "Format Atmaya Hoş Geldiniz.";
         formatNextText.text = "NEXT";
     }
+    public void LogicGatesStartFinish(bool state)
+    {
+         logicGatePanel.SetActive(state);
+         firstGate = false;
+         secondGate = false;
+         thirdGate = false;
+         fourthGate = false;
+         secondLayerFirstGate = false;
+         secondLayerSecondGate = false;
+    }
+    public void ChangeButtonBool(int index)
+    {
+        buttonState[index] = !buttonState[index];
+        buttonStateText[index].text = buttonState[index].ToString();
+        LogicGatesGame();
+    }
+    public void LogicGatesGame()
+    {
+        if(buttonState[0] || buttonState[1])
+        {
+            firstGate = true;
+            Debug.Log("First Gate out " + firstGate);
+        }
+        if(buttonState[2] && buttonState[3])
+        {
+            secondGate = true;
+            Debug.Log("Second Gate out " + secondGate);
+        }
+        if(buttonState[4] || buttonState[5])
+        {
+            thirdGate = true;
+            Debug.Log("third Gate out " + thirdGate);
+        }
+        if(buttonState[6] && buttonState[7])
+        {
+            fourthGate = true;
+    
+        }
+        if(firstGate || secondGate)
+        {
+            secondLayerFirstGate = true;
+            Debug.Log("secondFirst Gate out " + secondLayerFirstGate);
+        }
+        if(thirdGate && fourthGate)
+        {
+            secondLayerSecondGate = true;
+            Debug.Log("secondSecond Gate out " + secondLayerSecondGate);
+        }
+
+        if((secondLayerFirstGate && !secondLayerSecondGate) || (!secondLayerFirstGate && secondLayerSecondGate))
+        {
+            logicOutput.GetComponent<Image>().color = Color.green;
+            StartCoroutine(FinishLogicGates());
+        }
+
+    }
+    public IEnumerator FinishLogicGates()
+    {
+        yield return new WaitForSeconds(2f);
+        LogicGatesStartFinish(false);
+    }
     public void FormatGameNext()
     {
         if(i == 0)
         {
-            formatText.text = "Siz Sadece Next Diyin ve Arkanıza Yaslanın";
+            formatText.text = "Siz Sadece Next'e Basın ve Arkanıza Yaslanın.";
             i += 1;
             Debug.Log("hi");
         }
         else if (i == 1)
         {
-            formatText.text = "Birazcık Daha Next";
+            formatText.text = "Birazcık Daha Next.";
             i += 1;
         }
-        else if (i == 2)
+        else if(i == 2)
         {
-            formatText.text = "Tebrikler Format Başarıyla Atıldı!";
-            formatNextText.text = "Finish";
+            formatText.text = "Next... Next... Next...";
+        }
+        else if (i == 3)
+        {
+            formatText.text = "Tebrikler Başarıyla Format Attınız! Zor Olmasa Gerek :)";
+            formatNextText.text = "FINISH";
             i += 1;
         }
         else

@@ -17,11 +17,49 @@ public class UIManager : MonoBehaviour
     public GameObject dayImage;
     public GameObject toolbox;
     public GameObject shopPanel;
+    public GameObject formatPanel;
+    public TextMeshProUGUI formatText;
+    public TextMeshProUGUI formatNextText;
     private void Awake()
     {
         instance = this;
     }
-
+    int i = 0;
+    public void FormatGame(bool state)
+    {
+        formatPanel.SetActive(state);
+        formatText.text = "Format Atmaya Hoş Geldiniz.";
+        formatNextText.text = "NEXT";
+    }
+    public void FormatGameNext()
+    {
+        if(i == 0)
+        {
+            formatText.text = "Format Atmaya Hoş Geldiniz.";
+            i += 1;
+        }
+        else if(i == 1)
+        {
+            formatText.text = "Siz Sadece Next Diyin ve Arkanıza Yaslanın";
+            i += 1;
+            Debug.Log("hi");
+        }
+        else if (i == 2)
+        {
+            formatText.text = "Birazcık Daha Next";
+            i += 1;
+        }
+        else if (i == 3)
+        {
+            formatText.text = "Tebrikler Format Başarıyla Atıldı!";
+            formatNextText.text = "Finish";
+            i += 1;
+        }
+        else
+        {
+            FormatGame(false);
+        }
+    }
     public IEnumerator brokenInfo(string text)
     {
         brokenText.text = text;

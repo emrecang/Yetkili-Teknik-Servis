@@ -29,7 +29,6 @@ public class Helper : MonoBehaviour
         
         if (Physics.Raycast(from, to, out RaycastHit hit, 10f))
         {
-            Debug.Log(hit.collider.gameObject.name);
             return hit.collider.gameObject;
         }
         else

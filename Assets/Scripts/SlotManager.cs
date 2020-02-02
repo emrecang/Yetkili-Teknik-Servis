@@ -9,6 +9,7 @@ public class SlotManager : MonoBehaviour
 
     public PartData attachedPart;
 
+    public float offset;
     public void Detach()
     {
         GetComponent<BoxCollider>().enabled = true;
@@ -19,7 +20,7 @@ public class SlotManager : MonoBehaviour
     public IEnumerator Snap()
     {
         GameObject snapObj = GameManager.holdingObject;
-        while (Vector3.Distance(snapObj.transform.position, transform.position) > 0.03f)
+        while (Vector3.Distance(snapObj.transform.position, transform.position) > offset)
         {
             snapObj.transform.position = Vector3.Lerp(snapObj.transform.position, transform.position, 0.5f * Time.deltaTime);
             snapObj.transform.rotation = Quaternion.Lerp(snapObj.transform.rotation, transform.rotation, 1f * Time.deltaTime);

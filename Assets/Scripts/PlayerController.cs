@@ -18,24 +18,37 @@ public class PlayerController : MonoBehaviour
 
             if (GameManager.holdingObject == null)
             {
-                Debug.Log("ey");
                 return;
             }
-            Debug.Log("ler");
-            if (GameManager.holdingObject.CompareTag("Part") && GameManager.holdingObject.GetComponent<PartData>().attachedSlot != null)
+
+            if (GameManager.holdingObject.CompareTag("Device"))
+            {
+                GameManager.instance.brokenDevice = GameManager.holdingObject.GetComponent<DeviceManager>();
+                GameManager.holdingObject = null;
+                GameManager.instance.RepairGameState();
+            }
+
+
+            if (GameManager.holdingObject.CompareTag("Part") && 
+                GameManager.holdingObject.GetComponent<PartData>().attachedSlot != null)
             {
                 GameManager.holdingObject.GetComponent<PartData>().attachedSlot.Detach();
             }
+
+            
 
             DrawOutLine.SetHighLighted(GameManager.holdingObject);
         }
         
         if (Input.GetMouseButton(0))
         {
+
             if (GameManager.holdingObject == null)
             {
                 return;
             }
+
+            Debug.DrawRay(GameManager.holdingObject.transform.position, GameManager.holdingObject.transform.forward * 10, Color.red);
 
             if (GameManager.holdingObject.CompareTag("Part"))
             {
@@ -57,11 +70,29 @@ public class PlayerController : MonoBehaviour
             }
             if (GameManager.holdingObject.CompareTag("Part"))
             {
-                if(Helper.SendRay(GameManager.holdingObject.transform.position, GameManager.holdingObject.transform.forward).TryGetComponent<SlotManager>(out SlotManager candidateSlot) == true)
+                if (Helper.SendRay(GameManager.holdingObject.transform.position,
+                    GameManager.holdingObject.transform.forward).gameObject.CompareTag("box"))
                 {
-                    if(candidateSlot.snapCor == null)
-                        StartCoroutine(candidateSlot.Snap());
+                    UIManager.instance.ChangeToolBox(true);
                 }
+                Debug.Log("PlayerController girdi");
+
+                if (Helper.SendRay(GameManager.holdingObject.transform.position,
+                    GameManager.holdingObject.transform.forward).gameObject.TryGetComponent<SlotManager>(out SlotManager candidateSlot))
+                {
+                    Debug.Log("PlayerController girdi");
+                    if(candidateSlot.snapCor == null)
+                    {
+                        candidateSlot.snapCor = StartCoroutine(candidateSlot.Snap());
+                    }
+                    else
+                    {
+                        StopCoroutine(candidateSlot.Snap());
+                        candidateSlot.snapCor = null;
+                        candidateSlot.snapCor = StartCoroutine(candidateSlot.Snap());
+                    }
+                }
+
                 DrawOutLine.SetStandard(GameManager.holdingObject);
 
                 GameManager.holdingObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -90,10 +121,32 @@ public class PlayerController : MonoBehaviour
 
             if (GameManager.holdingObject.CompareTag("Part"))
             {
+
                 GameManager.holdingObject.transform.Rotate(
                     new Vector3(Input.GetAxis("Mouse X")  * rotationSpeed, Input.GetAxis("Mouse Y")  * rotationSpeed, 
                     Input.mouseScrollDelta.y * rotationSpeed / 2));
                 GameManager.holdingObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            if (GameManager.holdingObject == null)
+            {
+                return;
+            }
+            if (GameManager.holdingObject.CompareTag("Part"))
+            {
+                if (Helper.SendRay(GameManager.holdingObject.transform.position, 
+                    GameManager.holdingObject.transform.forward).TryGetComponent<SlotManager>(out SlotManager candidateSlot) == true)
+                {
+                    if (candidateSlot.snapCor == null)
+                        StartCoroutine(candidateSlot.Snap());
+                }
+                DrawOutLine.SetStandard(GameManager.holdingObject);
+
+                GameManager.holdingObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                GameManager.holdingObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+                GameManager.holdingObject = null;
             }
         }
     }

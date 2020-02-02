@@ -9,6 +9,11 @@ public class GameManager : MonoBehaviour
     public List<PersonData> person;
     public GameObject cust;
     public static GameManager instance;
+    public DeviceManager brokenDevice;
+
+    Transform startCamTransform;
+    Transform repairCamTransform;
+
     private void Awake()
     {
         instance = this;
@@ -23,6 +28,7 @@ public class GameManager : MonoBehaviour
     public GameStates states;
     public void Start()
     {
+        startCamTransform = Camera.main.transform;
         customer = cust;
         WaitCustomerGameState();
         DayManager.instance.StartIncreaseMinCor(10,1);
@@ -33,6 +39,9 @@ public class GameManager : MonoBehaviour
     }
     public void WaitCustomerGameState()
     {
+        Camera.main.transform.position = startCamTransform.position;
+        Camera.main.transform.rotation = startCamTransform.rotation;
+
         var rand = Random.Range(0, person.Count);
         Dialogue.instance.SetData(person[rand]);
         ChangeGameState(GameStates.WaitCustomer);
@@ -42,8 +51,13 @@ public class GameManager : MonoBehaviour
 
     public void RepairGameState()
     {
-        UIManager.instance.ChangeToolBox(true);
+        //repairCamTransform = brokenDevice.cameraTransform;
+        //Camera.main.transform.position = repairCamTransform.position;
+        //Camera.main.transform.rotation = repairCamTransform.rotation;
+        //Camera zoom
+        //brokenDevice.GetComponent<BoxCollider>().enabled = false;
     }
+
     public IEnumerator MoveCustomer()
     {
         while(customer.transform.position.x > 0)
@@ -61,6 +75,7 @@ public class GameManager : MonoBehaviour
             customer.transform.position += Vector3.right * Time.deltaTime* 3;
             yield return new WaitForSeconds(0.01f);
         }
+
         RepairGameState(); // automatic;
     }
     public void BackCustomerCor()

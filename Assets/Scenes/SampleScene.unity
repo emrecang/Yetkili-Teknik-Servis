@@ -297,6 +297,49 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 78346725}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &300213867
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 300213868}
+  - component: {fileID: 300213869}
+  m_Layer: 0
+  m_Name: DeviceManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &300213868
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300213867}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2048966630}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &300213869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300213867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fe2a93373dbe6447a11fbeb16ea7ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &580591327
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,6 +415,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a39479680af684eb50a510b4876f76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  person:
+  - {fileID: 11400000, guid: 4dfb7c82f9a25b34dad661a852b2420d, type: 2}
+  - {fileID: 11400000, guid: e40e55166bb2f4e4c899708ef9f3e178, type: 2}
+  - {fileID: 11400000, guid: 948de0e325262e34482db97ba8a19f1b, type: 2}
+  - {fileID: 11400000, guid: 0fa1865d4d126e941b5344cbae3a37d5, type: 2}
+  cust: {fileID: 0}
+  states: 0
 --- !u!1 &667384194
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,7 +467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slot: 0
-  canSnap: 0
+  snapped: 0
 --- !u!65 &667384197
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -841,6 +891,10 @@ MonoBehaviour:
   partInfoText: {fileID: 784885325}
   dayText: {fileID: 0}
   hourText: {fileID: 0}
+  dayImageText: {fileID: 0}
+  analogClock: {fileID: 0}
+  dayImage: {fileID: 0}
+  toolbox: {fileID: 0}
 --- !u!4 &987346219
 Transform:
   m_ObjectHideFlags: 0
@@ -1071,6 +1125,7 @@ Transform:
   - {fileID: 987346219}
   - {fileID: 604267906}
   - {fileID: 700387745}
+  - {fileID: 300213868}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1362,6 +1417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partName: Ram
   type: 0
+  attachedSlot: {fileID: 0}
 --- !u!54 &8296172667602204028
 Rigidbody:
   m_ObjectHideFlags: 0

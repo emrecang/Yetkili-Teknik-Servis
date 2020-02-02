@@ -71,4 +71,19 @@ public class DialogueManager : MonoBehaviour
 		GameManager.instance.BackCustomerCor();
 	}
 
+    public void SkipDialogCor()
+    {
+        StartCoroutine(SkipDialog());
+    }
+
+    public IEnumerator SkipDialog()
+    {
+        while (sentences.Count > 0)
+        {
+            DisplayNextSentence();
+            yield return new WaitForSeconds(0.01f);
+            
+        }
+        EndDialogue();
+    }
 }

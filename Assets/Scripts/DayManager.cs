@@ -47,6 +47,7 @@ public class DayManager : MonoBehaviour
         UIManager.instance.ChangeDayText(day.ToString() + ". Day");
         if (clockHour >= 18)
         {
+            DialogueManager.instance.SkipDialogCor();
             clockHour = 8;
             dailyMin = 0;
             day += 1;

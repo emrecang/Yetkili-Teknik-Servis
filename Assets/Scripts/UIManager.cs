@@ -11,13 +11,24 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI dayText;
     public TextMeshProUGUI hourText;
     public TextMeshProUGUI dayImageText;
+    public TextMeshProUGUI brokenText;
 
     public GameObject analogClock;
     public GameObject dayImage;
     public GameObject toolbox;
+    public GameObject shopPanel;
     private void Awake()
     {
         instance = this;
+    }
+
+    public IEnumerator brokenInfo(string text)
+    {
+        brokenText.text = text;
+
+        yield return new WaitForSeconds(2f);
+
+        brokenText.text = "";
     }
 
     public void ChangePartText(string text)

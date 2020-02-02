@@ -23,7 +23,7 @@ public class DrawOutLine : MonoBehaviour
         if (selected.CompareTag("Part"))
         {
             selected.GetComponent<MeshRenderer>().material.shader = myShader;
-            UIManager.instance.ChangePartText(selected.GetComponent<PartData>().partName);
+            UIManager.instance.ChangePartText(selected.GetComponent<PartData>().type.ToString());
         }
     }
 }

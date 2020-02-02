@@ -27,13 +27,15 @@ public class Helper : MonoBehaviour
     public static GameObject SendRay(Vector3 from, Vector3 to)
     {
         
-        if (Physics.Raycast(from, to, out RaycastHit hit, 0.8f))
+        if (Physics.Raycast(from, to, out RaycastHit hit, 10f))
         {
+            Debug.Log(hit.collider.gameObject.name);
             return hit.collider.gameObject;
         }
         else
         {
-            return new GameObject();
+            Debug.Log("boş");
+            return null;
         }
     }
 

@@ -45,13 +45,25 @@ public class DeviceManager : MonoBehaviour
         if (!isPCOK)
         {
             //PC hala bozuk
-            brokenPartsText += "hala bozuk.";
-            UIManager.instance.brokenInfo(brokenPartsText);
+            brokenPartsText += "Hala Bozuk.";
+            StartCoroutine(UIManager.instance.brokenInfo(brokenPartsText));
         }
         else
         {
             //PC tamir edildi.
-            GameManager.instance.WaitCustomerGameState();
+            brokenPartsText = "Her Şey Yolunda.";
+            StartCoroutine(UIManager.instance.brokenInfo(brokenPartsText));
+            StartCoroutine(WaitLittle());
+            GameManager.instance.brokenDevice.transform.position = GameManager.instance.cust.transform.position;
+            UIManager.instance.CheckButtonState(false);
+            GameManager.instance.ChangeMoneyValue(100);
+            GameManager.instance.dailyProfit += 100;
+
         }
+    }
+    public IEnumerator WaitLittle()
+    {
+        yield return new WaitForSeconds(4f);
+        GameManager.instance.WaitCustomerGameState();
     }
 }

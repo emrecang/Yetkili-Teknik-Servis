@@ -50,8 +50,13 @@ public class DayManager : MonoBehaviour
             DialogueManager.instance.SkipDialogCor();
             clockHour = 8;
             dailyMin = 0;
+            GameManager.instance.ChangeMoneyValue(-500);
+            GameManager.instance.dailyProfit -= 500;
+            UIManager.instance.ChangeDayImageText("KAZANILAN PARA: " + GameManager.instance.dailyProfit + "\n" + "GÜNLÜK MASRAF: " + "-500"+"\n" + "NET KAR: " + (GameManager.instance.dailyProfit - 500).ToString());
             day += 1;
             UIManager.instance.ChangeDayImage(true);
+
+            yield return new WaitForSeconds(3);
             UIManager.instance.ChangeDayImageText(day.ToString() + ". GÜN");
             yield return new WaitForSeconds(2f);
             UIManager.instance.ChangeDayImage(false);

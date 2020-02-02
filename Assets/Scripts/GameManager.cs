@@ -10,8 +10,9 @@ public class GameManager : MonoBehaviour
     public GameObject cust;
     public static GameManager instance;
     public DeviceManager brokenDevice;
-
+    public int money;
     Transform startCamTransform;
+    public int dailyProfit;
     Transform repairCamTransform;
 
     private void Awake()
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
     public GameStates states;
     public void Start()
     {
+        money = 1000;
         startCamTransform = Camera.main.transform;
         customer = cust;
         WaitCustomerGameState();
@@ -47,8 +49,11 @@ public class GameManager : MonoBehaviour
         ChangeGameState(GameStates.WaitCustomer);
         StartCoroutine(MoveCustomer());
     }
-
-
+    public void ChangeMoneyValue(int value)
+    {
+        money += value;
+    }
+    
     public void RepairGameState()
     {
         //repairCamTransform = brokenDevice.cameraTransform;
@@ -62,17 +67,23 @@ public class GameManager : MonoBehaviour
     {
         while(customer.transform.position.x > 0)
         {
-            customer.transform.position += Vector3.left * Time.deltaTime* 3;
+            customer.transform.position += Vector3.left * Time.deltaTime* 5;
+            brokenDevice.transform.position = customer.transform.position + new Vector3(0,0 -1);
+            
             yield return new WaitForSeconds(0.01f);
         }
+        
+        brokenDevice.transform.position = new Vector3(-2, 40.5f, -3);
         DialogueTrigger.instance.TriggerDialogue();
     }
     public IEnumerator BackCustomer()
     {
 
-        while (customer.transform.position.x < 9)
+        while (customer.transform.position.x < 10)
         {
-            customer.transform.position += Vector3.right * Time.deltaTime* 3;
+            customer.transform.position += Vector3.right * Time.deltaTime* 5;
+
+            //brokenDevice.transform.position = customer.transform.position;
             yield return new WaitForSeconds(0.01f);
         }
 

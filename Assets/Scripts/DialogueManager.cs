@@ -67,6 +67,7 @@ public class DialogueManager : MonoBehaviour
 
 	void EndDialogue()
 	{
+		UIManager.instance.CheckButtonState(true);
 		textPanel.gameObject.SetActive(false);
 		GameManager.instance.BackCustomerCor();
 	}

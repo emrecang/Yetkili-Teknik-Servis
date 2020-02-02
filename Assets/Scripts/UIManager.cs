@@ -11,20 +11,19 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI dayText;
     public TextMeshProUGUI hourText;
     public TextMeshProUGUI dayImageText;
-    public TextMeshProUGUI brokenText;
 
     public GameObject analogClock;
     public GameObject dayImage;
     public GameObject toolbox;
-    public GameObject shopPanel;
     public GameObject formatPanel;
     public TextMeshProUGUI formatText;
     public TextMeshProUGUI formatNextText;
-
+    public TextMeshProUGUI checkText;
     public GameObject logicGatePanel;
     public List<TextMeshProUGUI> buttonStateText;
     public List<bool> buttonState;
     public GameObject logicOutput;
+    public GameObject checkButton;
     bool firstGate;
     bool secondGate;
     bool thirdGate ;
@@ -57,6 +56,10 @@ public class UIManager : MonoBehaviour
         buttonState[index] = !buttonState[index];
         buttonStateText[index].text = buttonState[index].ToString();
         LogicGatesGame();
+    }
+    public void CheckButtonState(bool state)
+    {
+        checkButton.SetActive(state);
     }
     public void LogicGatesGame()
     {
@@ -94,6 +97,7 @@ public class UIManager : MonoBehaviour
         if((secondLayerFirstGate && !secondLayerSecondGate) || (!secondLayerFirstGate && secondLayerSecondGate))
         {
             logicOutput.GetComponent<Image>().color = Color.green;
+            GameManager.instance.brokenDevice.Fix(SlotType.CPU);
             StartCoroutine(FinishLogicGates());
         }
 
@@ -128,16 +132,17 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            GameManager.instance.brokenDevice.Fix(SlotType.HDD);
             FormatGame(false);
         }
     }
     public IEnumerator brokenInfo(string text)
     {
-        brokenText.text = text;
+        checkText.text = text;
 
         yield return new WaitForSeconds(2f);
 
-        brokenText.text = "";
+        checkText.text = "";
     }
 
     public void ChangePartText(string text)
